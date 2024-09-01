@@ -6,19 +6,21 @@ https://github.com/grafana/xk6
 
 https://github.com/grafana/sobek
 
+https://docs.influxdata.com/influxdb/v2/install/use-docker-compose
+
 ## Images
 
 https://hub.docker.com/r/grafana/k6
 
 https://hub.docker.com/r/grafana/xk6
 
+https://hub.docker.com/_/influxdb
+
 ## Guides
 
-https://k6.io/docs/get-started/installation
-
-https://k6.io/docs/get-started/running-k6
-
 https://grafana.com/docs/k6/latest/javascript-api
+
+https://docs.influxdata.com/influxdb/v2/install/use-docker-compose
 
 ## Why
 
