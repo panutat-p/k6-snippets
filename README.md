@@ -20,6 +20,8 @@ https://hub.docker.com/_/influxdb
 
 https://grafana.com/docs/k6/latest/javascript-api
 
+https://grafana.com/docs/grafana/latest/setup-grafana/installation/docker
+
 https://docs.influxdata.com/influxdb/v2/install/use-docker-compose
 
 ## Why
