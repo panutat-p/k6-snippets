@@ -10,15 +10,15 @@ https://docs.influxdata.com/influxdb/v2/install/use-docker-compose
 
 ## Images
 
+https://hub.docker.com/r/grafana/grafana
+
+https://hub.docker.com/_/influxdb
+
 https://hub.docker.com/r/grafana/k6
 
 https://hub.docker.com/r/grafana/xk6
 
-https://hub.docker.com/_/influxdb
-
 ## Guides
-
-https://grafana.com/docs/k6/latest/javascript-api
 
 https://grafana.com/docs/grafana/latest/setup-grafana/installation/docker
 
