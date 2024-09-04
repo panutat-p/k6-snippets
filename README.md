@@ -24,6 +24,14 @@ https://grafana.com/docs/grafana/latest/setup-grafana/installation/docker
 
 https://docs.influxdata.com/influxdb/v2/install/use-docker-compose
 
+## Plugins
+
+https://github.com/grafana/xk6-output-influxdb
+
+## Libraries
+
+https://github.com/grafana/k6-jslib-summary
+
 ## Why
 
 https://k6.io/blog/why-k6-does-not-introduce-multiple-scripting-languages
