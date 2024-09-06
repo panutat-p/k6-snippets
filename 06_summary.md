@@ -1,4 +1,28 @@
-# Constant Load
+# Summary
+
+## Print
+
+```js
+export function handleSummary(data) {
+  const result = {
+    iterations: data.metrics.iterations,
+    tps: data.metrics.tps,
+  }
+  return {
+    stdout: JSON.stringify(result, null, 2),
+  }
+}
+```
+
+## Export to file
+
+```js
+export function handleSummary(data) {
+  return {
+    'summary.json': JSON.stringify(data, null, 2),
+  }
+}
+```
 
 ## textSummary
 
