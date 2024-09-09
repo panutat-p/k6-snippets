@@ -1,27 +1,47 @@
 # Introduction
 
-## options
+https://grafana.com/docs/k6/latest/using-k6/http-requests
+
+## Duration
 
 ```js
-import http from 'k6/http';
-import { sleep } from 'k6';
+import http from 'k6/http'
+import { URL } from 'https://jslib.k6.io/url/1.0.0/index.js'
 
 export const options = {
   vus: 2,
-  duration: '10s',
-};
+  duration: '5s',
+}
 
 export default function() {
-  http.get('https://test.k6.io');
-  sleep(1);
+  const url = new URL('https://jsonplaceholder.typicode.com/todos/1')
+  http.get(url)
+}
+```
+
+## Iterations
+
+```js
+import http from 'k6/http'
+import { URL } from 'https://jslib.k6.io/url/1.0.0/index.js'
+
+export const options = {
+  vus: 2,
+  iterations: 10,
+}
+
+export default function() {
+  const url = new URL('https://jsonplaceholder.typicode.com/todos/1')
+  http.get(url)
 }
 ```
 
 ## stages
 
 ```js
-import http from 'k6/http';
-import { check, sleep } from 'k6';
+import http from 'k6/http'
+import { URL } from 'https://jslib.k6.io/url/1.0.0/index.js'
+import { check } from 'k6'
 
 export const options = {
   stages: [
@@ -29,11 +49,10 @@ export const options = {
     { duration: '5s', target: 10 },
     { duration: '10s', target: 0 },
   ],
-};
+}
 
-export default function () {
-  const res = http.get('https://httpbin.test.k6.io/');
-  check(res, { 'status was 200': (r) => r.status == 200 });
-  sleep(1);
+export default function() {
+  const url = new URL('https://jsonplaceholder.typicode.com/todos/1')
+  http.get(url)
 }
 ```
