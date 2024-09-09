@@ -11,7 +11,7 @@ import { URL } from 'https://jslib.k6.io/url/1.0.0/index.js';
 
 export const options = {
   scenarios: {
-    my_scenario: {
+    s1: {
       executor: 'constant-vus',
       vus: 2,
       duration: '5s',
@@ -39,7 +39,7 @@ import { URL } from 'https://jslib.k6.io/url/1.0.0/index.js';
 
 export const options = {
   scenarios: {
-    my_scenario: {
+    s2: {
       executor: 'ramping-vus',
       stages: [
         { duration: '3s', target: 10 },
