@@ -18,7 +18,7 @@ export default function() {
 
   check(res, { 
       'status_code is 200': (r) => r.status === 200,
-      'body_size is less than 10,000 bytes': (r) => r.body.length < 10000,
+      'body_size is less than 100 bytes': (r) => r.body.length < 100,
   })
 }
 ```

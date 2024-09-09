@@ -1,13 +1,62 @@
 # Executor
 
-## Constant VU
+https://grafana.com/docs/k6/latest/using-k6/scenarios/executors
+
+## Constant VUs
 
 ```js
+import http from 'k6/http';
+import { check } from 'k6';
+import { URL } from 'https://jslib.k6.io/url/1.0.0/index.js';
 
+export const options = {
+  scenarios: {
+    my_scenario: {
+      executor: 'constant-vus',
+      vus: 2,
+      duration: '5s',
+    },
+  },
+};
+
+export default function() {
+  const url = new URL('https://jsonplaceholder.typicode.com/todos/1');
+  const res = http.get(url);
+
+  check(res, { 
+    'status_code is 200': (r) => r.status === 200,
+    'body_size is less than 100 bytes': (r) => r.body.length < 100,
+  });
+}
 ```
 
 ## Ramping VUs
 
 ```js
+import http from 'k6/http';
+import { check } from 'k6';
+import { URL } from 'https://jslib.k6.io/url/1.0.0/index.js';
 
+export const options = {
+  scenarios: {
+    my_scenario: {
+      executor: 'ramping-vus',
+      stages: [
+        { duration: '3s', target: 10 },
+        { duration: '5s', target: 20 },
+        { duration: '3s', target: 0 },
+      ],
+    },
+  },
+};
+
+export default function() {
+  const url = new URL('https://jsonplaceholder.typicode.com/todos/1');
+  const res = http.get(url);
+
+  check(res, { 
+    'status_code is 200': (r) => r.status === 200,
+    'body_size is less than 100 bytes': (r) => r.body.length < 100,
+  });
+}
 ```
