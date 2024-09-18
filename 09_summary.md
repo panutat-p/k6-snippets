@@ -27,42 +27,22 @@ export function handleSummary(data) {
 ## textSummary
 
 ```js
-import { fail } from 'k6';
-import { Rate, Counter } from "k6/metrics";
-import http from "k6/http";
-import { textSummary } from "https://jslib.k6.io/k6-summary/0.0.3/index.js";
+import http from 'k6/http'
+import { Counter } from 'k6/metrics'
+import { URL } from 'https://jslib.k6.io/url/1.0.0/index.js'
+import { textSummary } from 'https://jslib.k6.io/k6-summary/0.1.0/index.js'
 
-const successRate = new Rate("success_rate");
-const tpsTotal = new Counter("tps_total");
-const tpsSuccess = new Counter("tps_success");
-const BASE_URL="http://localhost:80"
+const tps = new Counter('tps')
 
 export const options = {
-  vus: 15,
-  duration: '130s',
-};
-
-export function setup() {
-  const healthCheckEndpoint = `${BASE_URL}`;
-  const res = http.get(healthCheckEndpoint);
-  console.log(res);
-  if (res.status === 200 && res.body && res.json().code === 1000) {
-    console.log("Health check succeeded")
-  } else {
-    fail("status code was *not* 200");
-  }
+  vus: 2,
+  duration: '5s',
 }
 
 export default function () {
-  const res = http.get(`${BASE_URL}/api/v1/events`);
-
-  tpsTotal.add(1);
-  if (res.status === 200 && res.body && res.json().code === 1000) {
-    successRate.add(1);
-    tpsSuccess.add(1);
-  } else {
-    successRate.add(0);
-  }
+  const url = new URL('http://localhost:8080/fruits')
+  http.get(url.toString())
+  tps.add(1)
 }
 
 export function handleSummary(data) {
@@ -78,6 +58,6 @@ export function handleSummary(data) {
 
   return {
     stdout: textSummary(data, { indent: "→", enableColors: true }),
-  };
+  }
 }
 ```
