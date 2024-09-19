@@ -15,7 +15,7 @@ export const options = {
 
 export default function() {
   const url = new URL('https://jsonplaceholder.typicode.com/todos/1')
-  http.get(url)
+  http.get(url.toString())
 }
 ```
 
@@ -32,7 +32,7 @@ export const options = {
 
 export default function() {
   const url = new URL('https://jsonplaceholder.typicode.com/todos/1')
-  http.get(url)
+  http.get(url.toString())
 }
 ```
 
@@ -53,6 +53,6 @@ export const options = {
 
 export default function() {
   const url = new URL('https://jsonplaceholder.typicode.com/todos/1')
-  http.get(url)
+  http.get(url.toString())
 }
 ```

@@ -21,7 +21,7 @@ export const options = {
 
 export default function() {
   const url = new URL('https://jsonplaceholder.typicode.com/todos/1');
-  const res = http.get(url);
+  const res = http.get(url.toString());
 
   check(res, { 
     'status_code is 200': (r) => r.status === 200,
@@ -52,7 +52,7 @@ export const options = {
 
 export default function() {
   const url = new URL('https://jsonplaceholder.typicode.com/todos/1');
-  const res = http.get(url);
+  const res = http.get(url.toString());
 
   check(res, { 
     'status_code is 200': (r) => r.status === 200,
@@ -81,7 +81,7 @@ export const options = {
 
 export default function() {
   const url = new URL('https://jsonplaceholder.typicode.com/todos/1');
-  const res = http.get(url);
+  const res = http.get(url.toString());
 
   check(res, { 
     'status_code is 200': (r) => r.status === 200,
