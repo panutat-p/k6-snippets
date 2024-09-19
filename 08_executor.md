@@ -60,3 +60,32 @@ export default function() {
   });
 }
 ```
+
+## Shared iterations
+
+```js
+import http from 'k6/http'
+import { check } from 'k6'
+import { URL } from 'https://jslib.k6.io/url/1.0.0/index.js'
+
+export const options = {
+  scenarios: {
+    s3: {
+      executor: 'shared-iterations',
+      vus: 2,
+      iterations: 50,
+      maxDuration: '5s',
+    },
+  },
+}
+
+export default function() {
+  const url = new URL('https://jsonplaceholder.typicode.com/todos/1');
+  const res = http.get(url);
+
+  check(res, { 
+    'status_code is 200': (r) => r.status === 200,
+    'body_size is less than 100 bytes': (r) => r.body.length < 100,
+  });
+}
+```
