@@ -89,3 +89,32 @@ export default function() {
   });
 }
 ```
+
+## Per VU iterations
+
+```js
+import http from 'k6/http'
+import { check } from 'k6'
+import { URL } from 'https://jslib.k6.io/url/1.0.0/index.js'
+
+export const options = {
+  scenarios: {
+    s4: {
+      executor: 'per-vu-iterations',
+      vus: 2,
+      iterations: 10,
+      maxDuration: '10s',
+    },
+  },
+}
+
+export default function() {
+  const url = new URL('https://jsonplaceholder.typicode.com/todos/1')
+  const res = http.get(url.toString())
+
+  check(res, { 
+    'status_code is 200': (r) => r.status === 200,
+    'body_size is less than 100 bytes': (r) => r.body.length < 100,
+  })
+}
+```
