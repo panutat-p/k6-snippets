@@ -21,12 +21,7 @@ export const options = {
 
 export default function() {
   const url = new URL('https://jsonplaceholder.typicode.com/todos/1');
-  const res = http.get(url.toString());
-
-  check(res, { 
-    'status_code is 200': (r) => r.status === 200,
-    'body_size is less than 100 bytes': (r) => r.body.length < 100,
-  });
+  http.get(url.toString());
 }
 ```
 
@@ -52,12 +47,7 @@ export const options = {
 
 export default function() {
   const url = new URL('https://jsonplaceholder.typicode.com/todos/1');
-  const res = http.get(url.toString());
-
-  check(res, { 
-    'status_code is 200': (r) => r.status === 200,
-    'body_size is less than 100 bytes': (r) => r.body.length < 100,
-  });
+  http.get(url.toString());
 }
 ```
 
@@ -81,12 +71,7 @@ export const options = {
 
 export default function() {
   const url = new URL('https://jsonplaceholder.typicode.com/todos/1');
-  const res = http.get(url.toString());
-
-  check(res, { 
-    'status_code is 200': (r) => r.status === 200,
-    'body_size is less than 100 bytes': (r) => r.body.length < 100,
-  });
+  http.get(url.toString());
 }
 ```
 
@@ -110,11 +95,6 @@ export const options = {
 
 export default function() {
   const url = new URL('https://jsonplaceholder.typicode.com/todos/1')
-  const res = http.get(url.toString())
-
-  check(res, { 
-    'status_code is 200': (r) => r.status === 200,
-    'body_size is less than 100 bytes': (r) => r.body.length < 100,
-  })
+  http.get(url.toString())
 }
 ```
