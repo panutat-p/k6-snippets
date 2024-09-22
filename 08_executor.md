@@ -17,20 +17,20 @@ export const options = {
       duration: '5s',
     },
   },
-};
+}
 
 export default function() {
-  const url = new URL('https://jsonplaceholder.typicode.com/todos/1');
-  http.get(url.toString());
+  const url = new URL('https://jsonplaceholder.typicode.com/todos/1')
+  http.get(url.toString())
 }
 ```
 
 ## Ramping VUs
 
 ```js
-import http from 'k6/http';
-import { check } from 'k6';
-import { URL } from 'https://jslib.k6.io/url/1.0.0/index.js';
+import http from 'k6/http'
+import { check } from 'k6'
+import { URL } from 'https://jslib.k6.io/url/1.0.0/index.js'
 
 export const options = {
   scenarios: {
@@ -43,11 +43,11 @@ export const options = {
       ],
     },
   },
-};
+}
 
 export default function() {
-  const url = new URL('https://jsonplaceholder.typicode.com/todos/1');
-  http.get(url.toString());
+  const url = new URL('https://jsonplaceholder.typicode.com/todos/1')
+  http.get(url.toString())
 }
 ```
 
@@ -70,8 +70,8 @@ export const options = {
 }
 
 export default function() {
-  const url = new URL('https://jsonplaceholder.typicode.com/todos/1');
-  http.get(url.toString());
+  const url = new URL('https://jsonplaceholder.typicode.com/todos/1')
+  http.get(url.toString())
 }
 ```
 
@@ -96,5 +96,36 @@ export const options = {
 export default function() {
   const url = new URL('https://jsonplaceholder.typicode.com/todos/1')
   http.get(url.toString())
+}
+```
+
+## Constant arrival rate
+
+```js
+import http from 'k6/http'
+import { check } from 'k6'
+import { URL } from 'https://jslib.k6.io/url/1.0.0/index.js'
+
+export const options = {
+  scenarios: {
+    s4: {
+      executor: 'constant-arrival-rate',
+      rate: 10,
+      timeUnit: '1s',
+      duration: '5s',
+      preAllocatedVUs: 2,
+      maxVUs: 5,
+    },
+  },
+}
+
+export default function() {
+  const url = new URL('https://jsonplaceholder.typicode.com/todos/1')
+  const res = http.get(url.toString())
+
+  check(res, { 
+    'status_code is 200': (r) => r.status === 200,
+    'body_size is less than 100 bytes': (r) => r.body.length < 100,
+  })
 }
 ```
