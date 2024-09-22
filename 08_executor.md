@@ -108,7 +108,7 @@ import { URL } from 'https://jslib.k6.io/url/1.0.0/index.js'
 
 export const options = {
   scenarios: {
-    s4: {
+    s5: {
       executor: 'constant-arrival-rate',
       rate: 10,
       timeUnit: '1s',
