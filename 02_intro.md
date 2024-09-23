@@ -13,6 +13,10 @@ export const options = {
   duration: '5s',
 }
 
+export function setup() {
+  console.info('hello')
+}
+
 export default function() {
   const url = new URL('https://jsonplaceholder.typicode.com/todos/1')
   http.get(url.toString())
@@ -28,6 +32,10 @@ import { URL } from 'https://jslib.k6.io/url/1.0.0/index.js'
 export const options = {
   vus: 2,
   iterations: 10,
+}
+
+export function setup() {
+  console.info('hello')
 }
 
 export default function() {
@@ -49,6 +57,10 @@ export const options = {
     { duration: '5s', target: 10 },
     { duration: '10s', target: 0 },
   ],
+}
+
+export function setup() {
+  console.info('hello')
 }
 
 export default function() {
