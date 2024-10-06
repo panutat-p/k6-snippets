@@ -38,3 +38,21 @@ k6 run script.js
 ```sh
 k6 run --vus 10 --duration 30s script.js
 ```
+
+## xk6
+
+https://github.com/grafana/xk6
+
+https://grafana.com/docs/k6/latest/extensions/explore
+
+```sh
+xk6 build v0.54.0 \
+  --with github.com/szkiba/xk6-dotenv@latest \
+  --with github.com/avitalique/xk6-file@latest \
+  --with github.com/grafana/xk6-faker@latest \
+  --output bin/k6
+```
+
+```sh
+bin/k6 run script.js
+```
