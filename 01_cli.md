@@ -50,6 +50,7 @@ xk6 build v0.54.0 \
   --with github.com/szkiba/xk6-dotenv@latest \
   --with github.com/avitalique/xk6-file@latest \
   --with github.com/grafana/xk6-faker@latest \
+  --with github.com/grafana/xk6-output-influxdb \
   --output bin/k6
 ```
 
