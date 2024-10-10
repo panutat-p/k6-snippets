@@ -49,7 +49,7 @@ services:
 ## Pod
 
 ```sh
-kubectl create configmap k6-script-configmap --from-file=script/
+kubectl create configmap k6-script-configmap --from-file=path/to/script
 ```
 
 ```yaml
