@@ -48,6 +48,10 @@ services:
 
 ## Pod
 
+```sh
+kubectl create configmap k6-script-configmap --from-file=script/
+```
+
 ```yaml
 apiVersion: v1
 kind: Pod
