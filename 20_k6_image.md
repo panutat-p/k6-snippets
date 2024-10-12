@@ -1,5 +1,7 @@
 # xk6 pod
 
+https://hub.docker.com/_/golang
+
 https://hub.docker.com/r/grafana/k6
 
 https://hub.docker.com/r/grafana/xk6
@@ -8,6 +10,7 @@ https://hub.docker.com/r/grafana/xk6
 
 https://github.com/grafana/xk6-output-influxdb/blob/main/Dockerfile
 
+`Dockerfile`
 ```dockerfile
 FROM golang:1.23-alpine as builder
 WORKDIR $GOPATH/src/go.k6.io/k6
@@ -23,12 +26,20 @@ RUN xk6 build v0.54.0 \
 
 FROM alpine:3.20
 RUN apk add --no-cache ca-certificates && \
-    adduser -D -u 12345 -g 12345 k6
+    adduser -D -u 10001 -g 10001 k6
 COPY --from=builder /tmp/k6 /usr/bin/k6
 
-USER 12345
+USER 10001
 WORKDIR /home/k6
 ENTRYPOINT ["k6"]
+```
+
+```sh
+docker buildx build \
+--platform linux/amd64,linux/arm64  \
+-t your-image-name:your-tag \
+-f Dockerfile \
+.
 ```
 
 ## Compose
