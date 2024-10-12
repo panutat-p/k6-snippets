@@ -37,7 +37,7 @@ ENTRYPOINT ["k6"]
 ```sh
 docker buildx build \
 --platform linux/amd64,linux/arm64  \
--t your-image-name:your-tag \
+-t k6-custom \
 -f Dockerfile \
 .
 ```
