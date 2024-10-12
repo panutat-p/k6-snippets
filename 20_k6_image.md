@@ -37,7 +37,7 @@ ENTRYPOINT ["k6"]
 ```sh
 docker buildx build \
 --platform linux/amd64,linux/arm64  \
--t k6-custom \
+-t k6-custom:latest \
 -f Dockerfile \
 .
 ```
