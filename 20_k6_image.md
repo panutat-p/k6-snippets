@@ -1,16 +1,21 @@
-# xk6 pod
+# Docker Image
 
 https://hub.docker.com/_/golang
 
-https://hub.docker.com/r/grafana/k6
+https://hub.docker.com/_/alpine
 
-https://hub.docker.com/r/grafana/xk6
+```sh
+docker buildx build \
+--platform linux/amd64,linux/arm64  \
+-t admin/k6:latest \
+-f Dockerfile \
+.
+```
 
-## Dockerfile
+## Alpine
 
 https://github.com/grafana/xk6-output-influxdb/blob/main/Dockerfile
 
-`Dockerfile`
 ```dockerfile
 FROM golang:1.23-alpine as builder
 WORKDIR $GOPATH/src/go.k6.io/k6
@@ -24,22 +29,63 @@ RUN xk6 build v0.54.0 \
   --with github.com/grafana/xk6-faker@v0.4.0 \
   --output /tmp/k6
 
-FROM alpine:3.20
+FROM alpine:3
 RUN apk add --no-cache ca-certificates && \
-    adduser -D -u 10001 -g 10001 k6
+    adduser -D -u 1001 -g 1001 k6
 COPY --from=builder /tmp/k6 /usr/bin/k6
 
-USER 10001
+USER 1001
 WORKDIR /home/k6
 ENTRYPOINT ["k6"]
 ```
 
-```sh
-docker buildx build \
---platform linux/amd64,linux/arm64  \
--t k6-custom:latest \
--f Dockerfile \
-.
+## Bookworm
+
+```dockerfile
+FROM golang:bookworm
+
+WORKDIR /go
+RUN apt update && apt install -y ca-certificates && \
+    rm -rf /var/lib/apt/lists/* && \
+    go install github.com/go-task/task/v3/cmd/task@v3.39 && \
+    go install go.k6.io/xk6/cmd/xk6@v0.13 && \
+    xk6 build v0.54.0 \
+      --with github.com/grafana/xk6-output-influxdb@v0.5.0 \
+      --with github.com/szkiba/xk6-dotenv@v0.2.0 \
+      --with github.com/avitalique/xk6-file@v1.4.2 \
+      --with github.com/grafana/xk6-faker@v0.4.0 \
+      --output /usr/local/bin/k6
+
+RUN groupadd -g 1001 k6 && useradd -m -u 1001 -g 1001 k6
+USER 1001
+WORKDIR /home/k6
+```
+
+## Bookworm slim
+
+```dockerfile
+FROM golang:bookworm AS builder
+
+WORKDIR /go
+RUN GOBIN=/tmp go install github.com/go-task/task/v3/cmd/task@v3.39
+RUN go install go.k6.io/xk6/cmd/xk6@v0.13 && \
+    xk6 build v0.54.0 \
+      --with github.com/grafana/xk6-output-influxdb@v0.5.0 \
+      --with github.com/szkiba/xk6-dotenv@v0.2.0 \
+      --with github.com/avitalique/xk6-file@v1.4.2 \
+      --with github.com/grafana/xk6-faker@v0.4.0 \
+      --output /tmp/k6
+
+FROM debian:bookworm-slim AS runtime
+
+RUN apt update && apt install -y ca-certificates
+
+COPY --from=builder /tmp/task /usr/local/bin/task
+COPY --from=builder /tmp/k6 /usr/local/bin/k6
+
+RUN groupadd -g 1001 k6 && useradd -m -u 1001 -g 1001 k6
+USER 1001
+WORKDIR /home/k6
 ```
 
 ## Compose
@@ -47,7 +93,7 @@ docker buildx build \
 ```yaml
 services:
   xk6:
-    image: k6-custom:latest
+    image: admin/k6:latest
     command: 
       - run
       - script.js
