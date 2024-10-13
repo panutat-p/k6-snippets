@@ -78,7 +78,9 @@ RUN go install go.k6.io/xk6/cmd/xk6@v0.13 && \
 
 FROM debian:bookworm-slim AS runtime
 
-RUN apt update && apt install -y ca-certificates
+RUN apt update && \
+    apt install -y ca-certificates && \
+    rm -rf /var/lib/apt/lists/*
 
 COPY --from=builder /tmp/task /usr/local/bin/task
 COPY --from=builder /tmp/k6 /usr/local/bin/k6
@@ -116,8 +118,8 @@ metadata:
   name: k6-custom-pod
 spec:
   containers:
-    - name: k6-custom
-      image: k6-custom:latest
+    - name: k6
+      image: admin/k6:latest
       args: 
         - run
         - script.js
