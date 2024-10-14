@@ -9,10 +9,12 @@ https://grafana.com/docs/k6/latest/extensions/explore
 ```sh
 go install go.k6.io/xk6/cmd/xk6@v0.13
 xk6 build v0.54.0 \
-  --with github.com/grafana/xk6-output-influxdb@v0.5.0 \
-  --with github.com/szkiba/xk6-dotenv@v0.2.0 \
   --with github.com/avitalique/xk6-file@v1.4.2 \
+  --with github.com/szkiba/xk6-dotenv@v0.2.0 \
   --with github.com/grafana/xk6-faker@v0.4.0 \
+  --with github.com/grafana/xk6-sql@v0.4.1 \
+  --with github.com/grafana/xk6-amqp@v0.4.1 \
+  --with github.com/grafana/xk6-output-influxdb@v0.5.0 \
   --output $(go env GOPATH)/bin
 ```
 
