@@ -14,6 +14,10 @@ docker buildx build \
 .
 ```
 
+```sh
+docker container run --rm -it admin/k6:v1 /bin/bash
+```
+
 ## Bookworm
 
 ```dockerfile
@@ -21,15 +25,17 @@ FROM golang:bookworm
 WORKDIR /go
 RUN apt update && \
     apt install -y ca-certificates && \
+    rm -rf /var/lib/apt/lists/* && \
     groupadd -g 1001 k6 && useradd -m -u 1001 -g 1001 k6
-RUN go install github.com/go-task/task/v3/cmd/task@v3.39 && \
-    go install go.k6.io/xk6/cmd/xk6@v0.13 && \
+RUN go install go.k6.io/xk6/cmd/xk6@v0.13 && \
     xk6 build v0.54.0 \
-      --with github.com/grafana/xk6-output-influxdb@v0.5.0 \
-      --with github.com/szkiba/xk6-dotenv@v0.2.0 \
       --with github.com/avitalique/xk6-file@v1.4.2 \
+      --with github.com/szkiba/xk6-dotenv@v0.2.0 \
       --with github.com/grafana/xk6-faker@v0.4.0 \
-      --output /usr/local/bin/k6
+      --with github.com/grafana/xk6-sql@v0.4.1 \
+      --with github.com/grafana/xk6-amqp@v0.4.1 \
+      --with github.com/grafana/xk6-output-influxdb@v0.5.0 \
+      --output /go/bin/k6
 USER 1001
 WORKDIR /home/k6
 ```
@@ -42,10 +48,12 @@ WORKDIR /go
 RUN GOBIN=/tmp go install github.com/go-task/task/v3/cmd/task@v3.39
 RUN go install go.k6.io/xk6/cmd/xk6@v0.13 && \
     xk6 build v0.54.0 \
-      --with github.com/grafana/xk6-output-influxdb@v0.5.0 \
-      --with github.com/szkiba/xk6-dotenv@v0.2.0 \
       --with github.com/avitalique/xk6-file@v1.4.2 \
+      --with github.com/szkiba/xk6-dotenv@v0.2.0 \
       --with github.com/grafana/xk6-faker@v0.4.0 \
+      --with github.com/grafana/xk6-sql@v0.4.1 \
+      --with github.com/grafana/xk6-amqp@v0.4.1 \
+      --with github.com/grafana/xk6-output-influxdb@v0.5.0 \
       --output /tmp/k6
 
 
@@ -69,10 +77,12 @@ WORKDIR /go
 RUN GOBIN=/tmp go install github.com/go-task/task/v3/cmd/task@v3.39
 RUN go install go.k6.io/xk6/cmd/xk6@v0.13 && \
     xk6 build v0.54.0 \
-      --with github.com/grafana/xk6-output-influxdb@v0.5.0 \
-      --with github.com/szkiba/xk6-dotenv@v0.2.0 \
       --with github.com/avitalique/xk6-file@v1.4.2 \
+      --with github.com/szkiba/xk6-dotenv@v0.2.0 \
       --with github.com/grafana/xk6-faker@v0.4.0 \
+      --with github.com/grafana/xk6-sql@v0.4.1 \
+      --with github.com/grafana/xk6-amqp@v0.4.1 \
+      --with github.com/grafana/xk6-output-influxdb@v0.5.0 \
       --output /tmp/k6
 
 

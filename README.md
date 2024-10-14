@@ -1,32 +1,6 @@
 # k6-snippets
 
-https://github.com/grafana/k6
-
-https://github.com/grafana/xk6
-
-https://github.com/grafana/sobek
-
-https://docs.influxdata.com/influxdb/v2/install/use-docker-compose
-
-## Images
-
-https://hub.docker.com/r/grafana/grafana
-
-https://hub.docker.com/_/influxdb
-
-https://hub.docker.com/r/grafana/k6
-
-https://hub.docker.com/r/grafana/xk6
-
-## Guides
-
-https://grafana.com/docs/grafana/latest/setup-grafana/installation/docker
-
-https://docs.influxdata.com/influxdb/v2/install/use-docker-compose
-
-## Plugins
-
-https://github.com/grafana/xk6-output-influxdb
+https://github.com/panutat-p/k6-snippets
 
 ## Libraries
 
@@ -41,3 +15,9 @@ https://k6.io/blog/why-k6-does-not-introduce-multiple-scripting-languages
 https://github.com/grafana/k6/pull/3738
 
 https://grafana.com/docs/k6/latest/using-k6/javascript-typescript-compatibility-mode
+
+## InfluxDB
+
+https://docs.influxdata.com/influxdb/v2/install/use-docker-compose
+
+https://grafana.com/docs/grafana/latest/setup-grafana/installation/docker
