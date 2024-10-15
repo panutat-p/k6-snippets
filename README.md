@@ -2,6 +2,10 @@
 
 https://github.com/panutat-p/k6-snippets
 
+## Learn
+
+* https://github.com/grafana/k6-learn
+
 ## Libraries
 
 https://github.com/grafana/k6-jslib-summary
