@@ -11,6 +11,7 @@ import { URL } from 'https://jslib.k6.io/url/1.0.0/index.js'
 export const options = {
   vus: 2,
   duration: '5s',
+  maxDuration: '1h',
 }
 
 export function setup() {
@@ -32,6 +33,7 @@ import { URL } from 'https://jslib.k6.io/url/1.0.0/index.js'
 export const options = {
   vus: 2,
   iterations: 10,
+  maxDuration: '1h',
 }
 
 export function setup() {
@@ -80,6 +82,7 @@ console.warn('init') // This will be printed 6 times
 export const options = {
   vus: 3,
   iterations: 3,
+  maxDuration: '1h',
 }
 
 export function setup() {
