@@ -46,31 +46,6 @@ export default function() {
 }
 ```
 
-## Stages
-
-```js
-import http from 'k6/http'
-import { URL } from 'https://jslib.k6.io/url/1.0.0/index.js'
-import { check } from 'k6'
-
-export const options = {
-  stages: [
-    { duration: '10s', target: 20 },
-    { duration: '5s', target: 10 },
-    { duration: '10s', target: 0 },
-  ],
-}
-
-export function setup() {
-  console.info('hello')
-}
-
-export default function() {
-  const url = new URL('https://jsonplaceholder.typicode.com/todos/1')
-  http.get(url.toString())
-}
-```
-
 ## Life cycle
 
 ```js
