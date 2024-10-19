@@ -15,7 +15,13 @@ docker buildx build \
 ```
 
 ```sh
-docker container run --rm -it admin/k6:v1 /bin/bash
+docker container run \
+  --rm \
+  -it \
+  --name k6 \
+  --mount type=bind,source="$(pwd)",target=/home/k6 \
+  admin/k6 \
+  /bin/sh
 ```
 
 ## Bookworm
